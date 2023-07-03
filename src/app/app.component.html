@@ -1,58 +1,85 @@
+<style>
+  a:hover {
+    color: white;
+    background-color: #797878;
+    cursor: pointer;
+  }
+</style>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/home">Home</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/home">Bosh sahifa</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/html">HTML</a>
+          <a class="nav-link" href="/themes">Mavzular</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/html5">HTML5</a>
+          <a class="nav-link" (click)="byType(1,18)">HTML5</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/css">CSS</a>
+          <a class="nav-link" (click)="byType(2,19)">CSS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/javascript">JavaScript</a>
+          <a class="nav-link" (click)="byType(3,22)">JavaScript</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/javascript">JQuery</a>
+          <a class="nav-link" (click)="byType(4,25)">JQuery</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/bootstrap">Bootstrap</a>
+          <a class="nav-link" (click)="byType(4,26)">Bootstrap</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/php">PHP</a>
+          <a class="nav-link" (click)="byType(5,27)">PHP</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cms">CMS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/mysql">MYSql</a>
+          <a class="nav-link" (click)="byType(5,32)">CMS</a>
         </li>
         <li class="nav-item dropdown">
-<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--            Dropdown-->
-<!--          </a>-->
-<!--          <ul class="dropdown-menu">-->
-<!--            <li><a class="dropdown-item" href="#">Action</a></li>-->
-<!--            <li><a class="dropdown-item" href="#">Another action</a></li>-->
-<!--            <li><hr class="dropdown-divider"></li>-->
-<!--            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-<!--          </ul>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled">Disabled</a>-->
-<!--        </li>-->
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Saytdan qidirish" aria-label="Qidirish">
+        <button class="btn btn-outline-success" type="submit">Qidirish</button>
       </form>
     </div>
   </div>
 </nav>
+<div class="content" style="margin: 0 100px 50px 100px" *ngIf="parts">
+  <div *ngFor="let part of parts">
+    <h2 *ngIf="part.title" style="text-align: center">{{part.title}}</h2>
+    <div *ngIf="part.description">
+      <h4>{{part.description}}</h4>
+      <hr>
+    </div>
+    <div *ngIf="part.question">
+      <p>{{part.question}}</p>
+    </div>
+    <div *ngIf="part.codeTitle">
+      <p id="codeTitle">{{part.codeTitle}}</p>
+    </div>
+    <div *ngIf="part.codeDescription">
+      <p>{{part.codeDescription}}</p>
+    </div>
+    <div *ngIf="part.code">
+      <code>
+        <pre class="code fsize">{{part.code}}</pre>
+      </code>
+    </div>
+    <div *ngIf="part.result">
+      <p>{{part.result}}</p>
+    </div>
+    <div *ngIf="part.fullCode">
+      <pre class="code fsize">{{part.fullCode}}</pre>
+    </div>
+    <div *ngIf="part.additional">
+      <p>{{part.additional}}</p>
+    </div>
+    <div *ngIf="part.media" style="text-align: center">
+      <img src="assets/images/{{part.media!.photo}}">
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

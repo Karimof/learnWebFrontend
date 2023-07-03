@@ -1,8 +1,91 @@
-<div style="text-align: center; background: rgb(40, 42, 53); color: white; padding: 100px">
-  <h1>Dasturlashni biz bilan o'rganing!</h1>
-  <h3 style="margin: 0">Dunyodagi eng yirik veb-dasturchilar sayti bilan.</h3>
-</div>
+<div *ngIf="parts == null">
+  <div style="text-align: center; background: rgb(40, 42, 53); color: white; padding: 100px">
+    <h1>Dasturlashni biz bilan o'rganing!</h1>
+  </div>
 
-<svg style="background-color:#ffffff;" width="100%" height="70" viewBox="0 0 100 100" preserveAspectRatio="none">
-  <path id="wavepath" d="M0,0  L110,0C35,150 35,0 0,100z" fill="#282A35"></path>
-</svg>
+  <svg style="background-color:#ffffff;" width="100%" height="70" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path id="wavepath" d="M0,0  L110,0C35,150 35,0 0,100z" fill="#282A35"></path>
+  </svg>
+
+  <div class="row" style="text-align: center; margin: 0">
+    <div class="col-6">
+      <h1>HTML</h1>
+      <p>Veb-sahifalar yaratish uchun til</p>
+      <p>
+        <button (click)="byType(1,18)" class="btn btn-success">HTMLni o'rganing</button>
+      </p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=_e61WuTXc4E&list=PLpRkv-CMsu3X4nVukPFCaZUxqioeuGBZh" class="btn btn-dark">HTML video darslari</a>
+      </p>
+    </div>
+    <div class="col-6">
+      <h1>CSS</h1>
+      <p>Veb-sahifalarni uslublash tili</p>
+      <p>
+        <button (click)="byType(2,19)"  class="btn btn-success">CSSni o'rganing</button>
+      </p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=fvvrEX0U6yQ&list=PLpRkv-CMsu3U1fSwMxuaLpWU158bL8v7q" class="btn btn-dark">CSS video darslari</a>
+      </p>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row" style="text-align: center; margin: 0">
+    <div class="col-6">
+      <h1>JavaScript</h1>
+      <p>Veb-sahifalarni dasturlash tili</p>
+      <p>
+        <button (click)="byType(3,22)"  class="btn btn-success">JavaScriptni o'rganing</button>
+      </p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=zJuDsji3IbE&list=PLNS3PujVHR-ay0HpqbsPWccgEhJZk6K9u" class="btn btn-dark">JavaScript video darslari</a>
+      </p>
+    </div>
+    <div class="col-6">
+      <h1>PHP</h1>
+      <p>Veb-server dasturlash tili</p>
+      <p>
+        <button (click)="byType(5,27)"  class="btn btn-success">PHPni o'rganing</button>
+      </p>
+      <p>
+        <a href="https://www.youtube.com/watch?v=RMpqrOjdb9A&list=PLY4N-4FJdZQDu2HFOhl0S-yft-AgjixAE" class="btn btn-dark">PHP video darslari</a>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="content" style="margin: 0 100px 50px 100px" *ngIf="parts">
+  <div *ngFor="let part of parts">
+    <h2 *ngIf="part.title" style="text-align: center">{{part.title}}</h2>
+    <div *ngIf="part.description">
+      <h4>{{part.description}}</h4>
+      <hr>
+    </div>
+    <div *ngIf="part.question">
+      <p>{{part.question}}</p>
+    </div>
+    <div *ngIf="part.codeTitle">
+      <p id="codeTitle">{{part.codeTitle}}</p>
+    </div>
+    <div *ngIf="part.codeDescription">
+      <p>{{part.codeDescription}}</p>
+    </div>
+    <div *ngIf="part.code">
+      <code>
+        <pre class="code fsize">{{part.code}}</pre>
+      </code>
+    </div>
+    <div *ngIf="part.result">
+      <p>{{part.result}}</p>
+    </div>
+    <div *ngIf="part.fullCode">
+      <pre class="code fsize">{{part.fullCode}}</pre>
+    </div>
+    <div *ngIf="part.additional">
+      <p>{{part.additional}}</p>
+    </div>
+    <div *ngIf="part.media" style="text-align: center">
+      <img src="/assets/images/{{part.media!.photo}}" alt="surat">
+    </div>
+  </div>
+</div>

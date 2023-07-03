@@ -1,0 +1,170 @@
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Lato", sans-serif;
+    }
+
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 430px;
+      background-color: #f1f1f1;
+      position: absolute;
+      overflow: auto;
+    }
+
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .sidebar a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+    active {
+      background-color: #04AA6D;
+      color: white;
+    }
+
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+
+    div.content {
+      margin-left: 430px;
+      padding: 1px 16px;
+      height: 1000px;
+    }
+
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .sidebar a {
+        float: left;
+      }
+
+      div.content {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
+
+    .code {
+      padding: 20px;
+      border-radius: 5px;
+      border: 40px solid #dedede;
+      border-left: 15px solid #dedede;
+      border-right: 15px solid #dedede;
+      min-width: 30%;
+      max-width: 60%;
+    }
+
+    .fsize {
+      font-size: 12pt;
+    }
+
+    p {
+      max-width: max-content;
+      font-size: 14pt
+    }
+
+  </style>
+  <title>Mavzular</title>
+</head>
+<div class="sidebar">
+  <table id="menu">
+    <tr *ngFor="let theme of getThemes()">
+      <td>
+        <a id="{{theme.id}}" (click)="getSubTheme(theme.id!)">{{theme.title}}</a>
+        <ul id="{{theme.id}}submenu" style="display: none">
+          <li *ngFor="let subtheme of subThemes">
+            <a id="{{subtheme.id}}" style="margin: 5px 0 !important; padding: 5px"
+               (click)="partsBySubmenuId(subtheme.id!)">{{subtheme.title}}</a>
+            <ul id="{{subtheme.id}}subsub" *ngIf="subThemeId == subtheme.id">
+              <li *ngFor="let part of parts">
+                <a (click)="showSelectedPart(part.subSubmenuId!)" style="padding: 5px">{{part.title}}</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="content" *ngIf="getSelectedPart()">
+  <div *ngFor="let selectedPart of getSelectedPart()">
+    <h2 *ngIf="selectedPart.title" style="text-align: center">{{selectedPart.title}}</h2>
+    <div *ngIf="selectedPart.description">
+      <h4>{{selectedPart.description}}</h4>
+      <hr>
+    </div>
+
+    <div *ngIf="selectedPart.question">
+      <p>{{selectedPart.question}}</p>
+    </div>
+    <div *ngIf="selectedPart.codeTitle">
+      <p id="codeTitle">{{selectedPart.codeTitle}}</p>
+    </div>
+    <div *ngIf="selectedPart.codeDescription">
+      <p>{{selectedPart.codeDescription}}</p>
+    </div>
+    <div *ngIf="selectedPart.code">
+      <code>
+        <pre class="code fsize">{{selectedPart.code}}</pre>
+      </code>
+    </div>
+    <div *ngIf="selectedPart.result">
+      <p>{{selectedPart.result}}</p>
+    </div>
+    <div *ngIf="selectedPart.fullCode">
+      <pre class="code fsize">{{selectedPart.fullCode}}</pre>
+    </div>
+    <div *ngIf="selectedPart.additional">
+      <p>{{selectedPart.additional}}</p>
+    </div>
+    <div *ngIf="selectedPart.media" style="text-align: center">
+      <img src="assets/images/{{selectedPart.media!.photo}}">
+    </div>
+    <div *ngIf="selectedPart.presentation!">
+      <h3 style="text-align: center"><br>Mavzu bo'yicha online resurslar</h3>
+      <div class="row" style="padding: 50px; text-align: center">
+        <div class="col-4">
+          <a href="{{selectedPart.presentation}}" style="width: 200px">
+            <img width="100px" src="/assets/images/icons/presentation.jpg">
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="{{selectedPart.test}}" style="width: 200px">
+            <img width="100px"  src="/assets/images/icons/test.jpg">
+          </a>
+        </div>
+        <div class="col-4">
+          <a href="{{selectedPart.crossword}}" style="width: 200px">
+            <img width="100px"  src="/assets/images/icons/crossword.jpg">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
